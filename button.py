@@ -12,5 +12,7 @@ while True:
     if button == True:
         time.sleep(1)
         if button == True:
-            os.system("shutdown now -h")
+            with open("/home/pi/Documents/programs/rpi-programs/button_log.txt","a") as logf
+                logf.write("button shutdown\n")
+            #os.system("shutdown now -h")
     time.sleep(1)
