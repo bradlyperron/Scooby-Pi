@@ -1,37 +1,55 @@
 import socket
 import sys
 import time
+import struct
+import msvcrt
+import threading
 
-try:
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
-except socket.error:
-    print("Failed to connect")
-    sys.exit()
+def tcp_client_main(voltage=0.0):
+    def worker():
 
-print("Socket Created")
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
+        except socket.error:
+            print("Failed to connect")
+            sys.exit()
 
-server_address = ('localhost',8888) # specify host and port 
-(host, port) = server_address # unpack tuple
+        print("Socket Created")
 
-s.connect(server_address) # connect socket to port where server is listening
+        server_address = ('192.168.0.21',8888) # specify host and port 
+        (host, port) = server_address # unpack tuple
 
-print("Socket Connected {} to using IP {}".format(host, port))
+        s.connect(server_address) # connect socket to port where server is listening
 
-data = "ayy lmao" # data
+        print("Socket Connected {} to using IP {}".format(host, port))
 
-for i in range (10):
+        request = "feed me seymour" 
 
-    try:
-        s.sendall(data.encode()) # send data in byte array
-    except socket.error:
-        print("Did not send successfully")
-        sys.exit()
+        while not event.is_set():
 
-    print("data Sent Successfully")
+            try:
+                s.sendall(request.encode()) # send request in byte array
+            except socket.error:
+                print("Did not send successfully")
+                sys.exit()
 
-    reply = s.recv(4096) # recieve reply from server
+            reply = s.recv(4096) # recieve reply from server
 
-    print(reply.decode()) # print byte array decoded in to a string
-    time.sleep(1)
-print("closing socket") # close socket
-s.close()
+            (voltage.value,)=(struct.unpack('f',reply)) # unpack byte array inside tuple
+            #print(type(voltage))
+            time.sleep(1)
+            
+        print("closing socket") # close socket
+        s.close()
+        
+    def flag(): # wait for keyboard interrupt
+        if msvcrt.getch():
+            event.set()
+
+    event = threading.Event()
+
+    tflag = threading.Thread(target=flag)
+    tworker = threading.Thread(target=worker)
+
+    tflag.start()
+    tworker.start()
