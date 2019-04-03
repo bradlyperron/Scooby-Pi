@@ -7,7 +7,7 @@ from adafruit_ads1x15.analog_in import AnalogIn
 def adc_main(vin):
     print("adc starting")
     # (R1 + R2)/R2
-    resistor_ratio = 2.0 
+    resistor_ratio = 5.28 
 
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
