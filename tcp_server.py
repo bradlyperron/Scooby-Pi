@@ -13,7 +13,11 @@ def tcp_server_main(vin,amp):
 
     print("Socket Created")
 
+<<<<<<< HEAD
     server_address = ('192.168.0.16', 8888) #specify host and port 
+=======
+    server_address = ('172.29.30.168', 5005) #specify host and port 
+>>>>>>> 67b737a3c6a9599f92bcb8a979505d0c07564a2a
 
     try:
         s.bind(server_address)
