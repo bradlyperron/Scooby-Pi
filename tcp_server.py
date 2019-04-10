@@ -3,7 +3,7 @@ import sys
 import multiprocessing
 import struct
 
-def tcp_server_main(vin):
+def tcp_server_main(vin,amp):
     print("server starting")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
@@ -13,7 +13,7 @@ def tcp_server_main(vin):
 
     print("Socket Created")
 
-    server_address = ('192.168.0.21', 8888) #specify host and port 
+    server_address = ('192.168.0.16', 8888) #specify host and port 
 
     try:
         s.bind(server_address)
@@ -30,14 +30,19 @@ def tcp_server_main(vin):
     conn, addr = s.accept()
 
     print("Connected with {} : {}".format(addr[0], str(addr[1])))
-
+    
     while True:
-        request = conn.recv(1024) # check if client wants data
-        #print(vin.value) # voltage from adc
-        if not request: # if connection is broken, break
+        volts = str(vin.value)
+        amps = str(amp.value)
+        request = conn.recv(1024).decode()
+        if request == "voltage":
+            conn.sendall(volts.encode()) # send all data in one packet
+        elif request == "current":
+            conn.sendall(amps.encode())
+        elif request:
+            print("invalid request")
+        else:
             break
-        conn.sendall(bytearray(struct.pack("f", vin.value))) # send all data in one packet
-
     conn.close() #close connection
     s.close() #close socket
     print("server stopping")
