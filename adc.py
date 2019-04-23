@@ -22,23 +22,22 @@ def adc_main(vin,amp,prim_amp):
     chan1 = AnalogIn(ads, ADS.P1) #primary amp
     chan2 = AnalogIn(ads, ADS.P2) #secondary amp
 
-    offset = 0
-    scale = 1
+    offset = 2.558
+    scale = 0.04
     while True:
         #calculate input voltage and amps
         vin.value = chan0.voltage*resistor_ratio
-        
         i=0
-        amp_val = prim_amp_val = [0]*5
-        
-        for i in range(5):
-            prim_amp_val[i] = (chan1.value-offset)/scale
-            amp_val[i] = (chan2.value-offset)/scale
+	prim_amp_val = [0]*5
+	amp_val = [0]*5
+
+	for i in range(5):
+            prim_amp_val[i] = (chan1.voltage-offset)/scale
+            amp_val[i] = (chan2.voltage-offset)/scale
             time.sleep(0.5)
-        
-        amp.value = np.mean(amp_val)
-        prim_amp.value = np.mean(prim_amp_val)
-        
-        print("{}, {}".format(amp.value,prim_amp.value))
-        
+
+        amp.value = np.average(amp_val)
+        prim_amp.value = np.average(prim_amp_val)
+        print("v: {}, a: {}, pa: {}".format(vin.value,amp.value,prim_amp.value))
+
     print("adc stopping")

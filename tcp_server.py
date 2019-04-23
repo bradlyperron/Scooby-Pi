@@ -16,7 +16,7 @@ def tcp_server_main(vin,amp,prim_amp):
 
     #server_address = ('192.168.0.16', 8888) #specify host and port 
 
-    server_address = ('172.29.30.168', 5005) #specify host and port 
+    server_address = ('172.29.174.148', 5005) #specify host and port 
 
 
     try:
