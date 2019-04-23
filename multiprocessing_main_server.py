@@ -8,10 +8,11 @@ if __name__ == "__main__":
     #create shared memory value to store voltage read by adc
     vin = multiprocessing.Value('d', 0.0)
     amp = multiprocessing.Value('d',0.0)
+    prim_amp = multiprocessing.Value('d',0.0)
     
     # create processes
-    p_adc = multiprocessing.Process(target=adc_main,args=(vin,amp))
-    p_tcp_server = multiprocessing.Process(target=tcp_server_main,args=(vin,amp))
+    p_adc = multiprocessing.Process(target=adc_main,args=(vin,amp,prim_amp))
+    p_tcp_server = multiprocessing.Process(target=tcp_server_main,args=(vin,amp,prim_amp))
     
     # start processes
     p_adc.start()

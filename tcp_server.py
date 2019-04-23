@@ -3,7 +3,7 @@ import sys
 import multiprocessing
 import struct
 
-def tcp_server_main(vin,amp):
+def tcp_server_main(vin,amp,prim_amp):
     print("server starting")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
@@ -23,6 +23,7 @@ def tcp_server_main(vin,amp):
         s.bind(server_address)
     except socket.error:
         print("Binding failed")
+        s.close()
         sys.exit()
 
     print("Socked has been bounded")
@@ -38,11 +39,14 @@ def tcp_server_main(vin,amp):
     while True:
         volts = str(vin.value)
         amps = str(amp.value)
+        prim_amps = str(prim_amp.value)
         request = conn.recv(1024).decode()
         if request == "voltage":
             conn.sendall(volts.encode()) # send all data in one packet
         elif request == "current":
             conn.sendall(amps.encode())
+        elif request == "prim_current":
+            conn.sendall(prim_amps.encode())
         elif request:
             print("invalid request")
         else:
