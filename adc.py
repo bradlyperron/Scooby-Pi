@@ -28,10 +28,10 @@ def adc_main(vin,amp,prim_amp):
         #calculate input voltage and amps
         vin.value = chan0.voltage*resistor_ratio
         i=0
-	prim_amp_val = [0]*5
-	amp_val = [0]*5
+        prim_amp_val = [0]*5
+        amp_val = [0]*5
 
-	for i in range(5):
+        for i in range(5):
             prim_amp_val[i] = (chan1.voltage-offset)/scale
             amp_val[i] = (chan2.voltage-offset)/scale
             time.sleep(0.5)
