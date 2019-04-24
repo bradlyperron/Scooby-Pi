@@ -25,13 +25,13 @@ def amp_main(amp):
     line, = ax.plot(xs, ys)
 
     # Add labels
-    plt.title('Amperage over Time')
+    plt.title('5v Amperage over Time')
     plt.xlabel('Seconds')
     plt.ylabel('Amps (A)')
 
     # This function is called periodically from FuncAnimation
     def animate(i, ys, start):
-
+        #print("amp: {}".format(amp.value))
         # Add y to list
         ys.append(amp.value)
 

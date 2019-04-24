@@ -25,13 +25,13 @@ def prim_amp_main(prim_amp):
     line, = ax.plot(xs, ys)
 
     # Add labels
-    plt.title('Amperage over Time')
+    plt.title('12v Amperage over Time')
     plt.xlabel('Seconds')
     plt.ylabel('Amps (A)')
 
     # This function is called periodically from FuncAnimation
     def animate(i, ys, start):
-
+        #print("prim_amp: {}".format(prim_amp.value))
         # Add y to list
         ys.append(prim_amp.value)
 
@@ -47,7 +47,7 @@ def prim_amp_main(prim_amp):
     ani = animation.FuncAnimation(fig,
         animate,
         fargs=(ys,start),
-        interval=1000,
+        interval=500,
         blit=True)
 
     plt.show()    

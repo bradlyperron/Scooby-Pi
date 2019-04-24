@@ -70,7 +70,7 @@ def volt_main(voltage):
     ani = animation.FuncAnimation(fig,
         animate,
         fargs=(ys,start),
-        interval=5000,
+        interval=60000,
         blit=True)
 
     plt.show()    
