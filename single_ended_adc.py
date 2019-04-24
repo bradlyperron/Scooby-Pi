@@ -25,15 +25,18 @@ chan2 = AnalogIn(ads, ADS.P2)
 #print("{:>5}\t{:>5}".format('raw', 'v'))
 print("{:>5}\t{:>5}".format('volts', 'amps'))
 
+offset = 2.546
+scale = 0.04
+
 while True:
-    v = chan0.voltage*resistor_ratio
+    #v = chan0.voltage*resistor_ratio
     i=0
     val=[0]*5
     for i in range(5):
         val[i]=chan2.voltage
         time.sleep(0.5)
     vals = (val[0]+val[1]+val[2]+val[3]+val[4])/5
-    amps = (vals-2.558)/(0.040)
+    amps = (vals-offset)/(scale)
     #print("{:>5.3f}\t{:>5.3f}\t{:>5.3f}\t{:>5.3f}".format(chan0.voltage,chan1.voltage,chan2.voltage,v))
     print("{:>5.3f}\t{:>5.3f}".format(vals,amps))
     time.sleep(0.5)
