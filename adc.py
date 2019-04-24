@@ -22,7 +22,8 @@ def adc_main(vin,amp,prim_amp):
     chan1 = AnalogIn(ads, ADS.P1) #primary amp
     chan2 = AnalogIn(ads, ADS.P2) #secondary amp
 
-    offset = 2.558
+    a_offset = 2.558
+    pa_offset = 2.540
     scale = 0.04
     while True:
         #calculate input voltage and amps
@@ -32,8 +33,8 @@ def adc_main(vin,amp,prim_amp):
         amp_val = [0]*5
 
         for i in range(5):
-            prim_amp_val[i] = (chan1.voltage-offset)/scale
-            amp_val[i] = (chan2.voltage-offset)/scale
+            prim_amp_val[i] = (chan1.voltage-pa_offset)/scale
+            amp_val[i] = (chan2.voltage-a_offset)/scale
             time.sleep(0.5)
 
         amp.value = np.average(amp_val)
