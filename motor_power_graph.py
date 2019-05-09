@@ -5,12 +5,12 @@ import matplotlib.animation as animation
 import numpy as np
 from pathlib import Path
 
-def amp_main(amp):
+def motor_power_graph_main(motor_amp,volt1):
 
     # amperage graph parameters
     x_len = 60         # Number of points to display
-    yticks = np.arange(0,15,0.5)   # generate y axis
-    ylim = [0,15]   # min max of y axis
+    yticks = np.arange(0,100,5)   # generate y axis
+    ylim = [0,100]   # min max of y axis
     start = t.time()
 
     # Create figure for plotting
@@ -25,15 +25,15 @@ def amp_main(amp):
     line, = ax.plot(xs, ys)
 
     # Add labels
-    plt.title('5v Amperage over Time')
+    plt.title('Motor Power vs Time')
     plt.xlabel('Seconds')
-    plt.ylabel('Amps (A)')
+    plt.ylabel('Watts')
 
     # This function is called periodically from FuncAnimation
     def animate(i, ys, start):
         #print("amp: {}".format(amp.value))
         # Add y to list
-        ys.append(amp.value)
+        ys.append(motor_amp.value*volt1.value)
 
         # Limit y list to set number of items
         ys = ys[-x_len:]
@@ -47,7 +47,7 @@ def amp_main(amp):
     ani = animation.FuncAnimation(fig,
         animate,
         fargs=(ys,start),
-        interval=1000,
+        interval=500,
         blit=True)
 
     plt.show()    
