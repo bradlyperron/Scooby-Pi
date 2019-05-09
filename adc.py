@@ -23,8 +23,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
     chan2 = AnalogIn(ads, ADS.P2) #motor current
     chan3 = AnalogIn(ads, ADS.P3) #actuator current
 
-    motor_amp_offset = 2.558
-    actuator_amp_offset = 2.546
+    motor_amp_offset = 2.526
+    actuator_amp_offset = 2.477
     scale = 0.04
     while True:
         #calculate input voltage and amps
