@@ -5,7 +5,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import numpy as np
 
-def adc_main(vin,amp,prim_amp):
+def adc_main(volt1,volt2,motor_amp,actuator_amp):
     print("adc starting")
     # (R1 + R2)/R2
 
@@ -18,49 +18,28 @@ def adc_main(vin,amp,prim_amp):
     ads = ADS.ADS1115(i2c)
 
     # Create single-ended input on channel 0
-    chan0 = AnalogIn(ads, ADS.P0) #voltage
-    chan1 = AnalogIn(ads, ADS.P1) #primary amp
-    chan2 = AnalogIn(ads, ADS.P2) #secondary amp
+    chan0 = AnalogIn(ads, ADS.P0) #primary voltage
+    chan1 = AnalogIn(ads, ADS.P1) #secondary voltage
+    chan2 = AnalogIn(ads, ADS.P2) #motor current
+    chan3 = AnalogIn(ads, ADS.P3) #actuator current
 
-<<<<<<< HEAD
-    prim_amp_offset = 2.558
-    amp_offset = 2.546
+    motor_amp_offset = 2.558
+    actuator_amp_offset = 2.546
     scale = 0.04
     while True:
         #calculate input voltage and amps
-        vin.value = chan0.voltage*resistor_ratio
+        volt1.value = chan0.voltage*resistor_ratio
+        volt2.value = chan1.voltage*resistor_ratio
         i=0
-        prim_amp_val = [0]*5
-        amp_val = [0]*5
+        motor_amp_val = [0]*5
+        actuator_amp_val = [0]*5
 
         for i in range(5):
-            prim_amp_val[i] = (chan1.voltage-prim_amp_offset)/scale
-            amp_val[i] = (chan2.voltage-amp_offset)/scale
+            motor_amp_val[i] = (chan2.voltage-motor_amp_offset)/scale
+            actuator_amp_val[i] = (chan3.voltage-actuator_amp_offset)/scale
             time.sleep(0.25)
 
-        amp.value = np.average(amp_val)
-        prim_amp.value = np.average(prim_amp_val)
-        #print("v: {}, a: {}, pa: {}".format(vin.value,amp.value,prim_amp.value))
-
-=======
-    offset = 0
-    scale = 1
-    while True:
-        #calculate input voltage and amps
-        vin.value = chan0.voltage*resistor_ratio
+        motor_amp.value = np.average(motor_amp_val)
+        actuator_amp.value = np.average(actuator_amp_val)
         
-        i=0
-        amp_val = prim_amp_val = [0]*5
-        
-        for i in range(5):
-            prim_amp_val[i] = (chan1.value-offset)/scale
-            amp_val[i] = (chan2.value-offset)/scale
-            time.sleep(0.5)
-        
-        amp.value = np.mean(amp_val)
-        prim_amp.value = np.mean(prim_amp_val)
-        
-        print("{}, {}".format(amp.value,prim_amp.value))
-        
->>>>>>> ebbc747... suh
     print("adc stopping")
