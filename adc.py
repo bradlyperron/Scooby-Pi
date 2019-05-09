@@ -9,7 +9,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
     print("adc starting")
     # (R1 + R2)/R2
 
-    resistor_ratio = 4.9305
+    resistor_ratio2 = 4.9305
+    resistor_ratio1 = 3.1088
 
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
@@ -23,13 +24,13 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
     chan2 = AnalogIn(ads, ADS.P2) #motor current
     chan3 = AnalogIn(ads, ADS.P3) #actuator current
 
-    motor_amp_offset = 2.526
-    actuator_amp_offset = 2.477
+    motor_amp_offset = 2.505
+    actuator_amp_offset = 2.550
     scale = 0.04
     while True:
         #calculate input voltage and amps
-        volt1.value = chan0.voltage*resistor_ratio
-        volt2.value = chan1.voltage*resistor_ratio
+        volt1.value = chan0.voltage*resistor_ratio1
+        volt2.value = chan1.voltage*resistor_ratio2
         i=0
         motor_amp_val = [0]*5
         actuator_amp_val = [0]*5
@@ -38,7 +39,9 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
             motor_amp_val[i] = (chan2.voltage-motor_amp_offset)/scale
             actuator_amp_val[i] = (chan3.voltage-actuator_amp_offset)/scale
             time.sleep(0.25)
-
+        
+        print("motor amp: {}".format(motor_amp.value))
+        print("actuator amp: {}".format(actuator_amp.value))
         motor_amp.value = np.average(motor_amp_val)
         actuator_amp.value = np.average(actuator_amp_val)
         
