@@ -3,7 +3,7 @@ import time
 import os
 
 #GPIO SETUP
-channel = 17
+channel = 21
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(channel, GPIO.IN)
 
