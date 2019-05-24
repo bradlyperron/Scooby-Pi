@@ -1,5 +1,5 @@
 import time as t
-
+#print all values for testing
 def print_main(volt1,volt2,actuator_amp,motor_amp):
     print("{:>3}\t{:>3}\t{:>3}\t{:>3}".format('V1','V2','AA','AM'))
     while True:
