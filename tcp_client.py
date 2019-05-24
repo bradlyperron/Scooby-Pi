@@ -74,19 +74,15 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
             reply = s.recv(4096) 
             # unpack byte array inside tuple
             motor_amp.value = float(reply.decode()) 
-            #print("{:>3.1f}\t{:>5.1f}".format(motor_amp.value,actuator_amp.value))
             time.sleep(1)
 
-            reply = s.recv(4096) # recieve reply from server
-            motor_amp.value = float(reply.decode()) # unpack byte array inside tuple
-            time.sleep(1)
-
-            print("closing socket") # close socket
-            s.close()
+        print("closing socket") # close socket
+        s.close()
             
     def flag(): 
         # wait for keyboard interrupt 'q'
         if msvcrt.getch() == b'q':
+            print("quit")
             event.set()
 
     event = threading.Event()
