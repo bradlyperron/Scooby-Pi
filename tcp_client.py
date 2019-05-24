@@ -28,50 +28,27 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
         while not event.is_set():
             request = "volt1" 
             try:
-                # send request in byte array
-                s.sendall(request.encode()) 
+                s.sendall(request.encode()) # send request in byte array
             except socket.error:
                 print("Did not send successfully")
                 sys.exit()
-            # recieve reply from server
-            reply = s.recv(4096) 
-            # unpack byte array inside tuple
-            volt1.value = float(reply.decode()) 
+
+            reply = s.recv(4096) # recieve reply from server
+
+            volt1.value = float(reply.decode()) # unpack byte array inside tuple
             time.sleep(1)
 
-            print("Socket Created")
+            request = "volt2" 
+            try:
+                s.sendall(request.encode()) # send request in byte array
+            except socket.error:
+                print("Did not send successfully")
+                sys.exit()
 
-            server_address = ('172.29.93.7',5005) # specify host and port
-            (host, port) = server_address # unpack tuple
+            reply = s.recv(4096) # recieve reply from server
 
-            s.connect(server_address) # connect socket to port where server is listening
-
-            print("Socket Connected {} to using IP {}".format(host, port))
-
-            while not event.is_set():
-                request = "volt1" 
-                try:
-                    s.sendall(request.encode()) # send request in byte array
-                except socket.error:
-                    print("Did not send successfully")
-                    sys.exit()
-
-                reply = s.recv(4096) # recieve reply from server
-
-                volt1.value = float(reply.decode()) # unpack byte array inside tuple
-                time.sleep(1)
-
-                request = "volt2" 
-                try:
-                    s.sendall(request.encode()) # send request in byte array
-                except socket.error:
-                    print("Did not send successfully")
-                    sys.exit()
-
-                reply = s.recv(4096) # recieve reply from server
-
-                volt2.value = float(reply.decode()) # unpack byte array inside tuple
-                time.sleep(1)
+            volt2.value = float(reply.decode()) # unpack byte array inside tuple
+            time.sleep(1)
 
             request = "actuator current"
             try:
