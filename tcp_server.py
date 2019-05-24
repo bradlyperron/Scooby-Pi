@@ -37,18 +37,6 @@ def tcp_server_main(volt1,volt2,motor_amp,actuator_amp):
     print("Connected with {} : {}".format(addr[0], str(addr[1])))
     
     while True:
-<<<<<<< HEAD
-        volts = str(vin.value)
-        amps = str(amp.value)
-        prim_amps = str(prim_amp.value)
-        request = conn.recv(1024).decode()
-        if request == "voltage":
-            conn.sendall(volts.encode()) # send all data in one packet
-        elif request == "current":
-            conn.sendall(amps.encode())
-        elif request == "prim_current":
-            conn.sendall(prim_amps.encode())
-=======
         v1 = str(volt1.value)
         v2 = str(volt2.value)
         motor_amps = str(motor_amp.value)
@@ -62,7 +50,6 @@ def tcp_server_main(volt1,volt2,motor_amp,actuator_amp):
             conn.sendall(motor_amps.encode())
         elif request == "actuator current":
             conn.sendall(actuator_amps.encode())
->>>>>>> 419900568dd61da916478d1c72674a0281b55964
         elif request:
             print("invalid request")
         else:
