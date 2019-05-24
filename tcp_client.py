@@ -16,7 +16,7 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
 
         print("Socket Created")
 
-        server_address = ('172.29.174.148',5005) # specify host and port
+        server_address = ('172.29.93.7',5005) # specify host and port
         #server_address = ('192.168.0.16', 8888) 
         (host, port) = server_address # unpack tuple
 
@@ -59,7 +59,6 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
 
             reply = s.recv(4096) # recieve reply from server
             actuator_amp.value = float(reply.decode()) # unpack byte array inside tuple
-            #print("{:>3.1f}\t{:>5.1f}".format(amp.value,voltage.value))
             time.sleep(1)
             
             request = "motor current"
@@ -71,6 +70,7 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
 
             reply = s.recv(4096) # recieve reply from server
             motor_amp.value = float(reply.decode()) # unpack byte array inside tuple
+            #print("{:>3.1f}\t{:>5.1f}".format(motor_amp.value,actuator_amp.value))
             time.sleep(1)
 
         print("closing socket") # close socket
