@@ -25,15 +25,15 @@ if __name__ == "__main__":
     #start processes
     p_tcp_client.start()
     time.sleep(2)
-    #p_volt_print.start()
-    #p_actuator_power_graph.start()
-    #p_motor_power_graph.start()
-    p_print_out_test.start()
+    p_volt_print.start()
+    p_actuator_power_graph.start()
+    p_motor_power_graph.start()
+    #p_print_out_test.start()
     
     #end processes
     p_tcp_client.join()
-    #p_volt_print.terminate()
-    #p_actuator_power_graph.terminate()
-    #p_motor_power_graph.terminate()
-    p_print_out_test.terminate()
+    p_volt_print.terminate()
+    p_actuator_power_graph.terminate()
+    p_motor_power_graph.terminate()
+    #p_print_out_test.terminate()
     
