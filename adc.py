@@ -29,8 +29,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
     actuator_amp_offset = 2.520 
     scale = 0.04
     while True:
-        print('ch0: '+chan0.voltage)
-        print('ch1: '+chan1.voltage)
+        print('ch0: {}'.format(chan0.voltage))
+        print('ch1: {}'.format(chan1.voltage))
         #calculate input voltage and amps
         volt1.value = chan0.voltage*resistor_ratio1
         volt2.value = chan1.voltage*resistor_ratio2
