@@ -9,8 +9,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp):
     print("adc starting")
 
     # (R1 + R2)/R2
-    resistor_ratio2 = 4.87
-    resistor_ratio1 = 3.04
+    resistor_ratio2 = 5.21
+    resistor_ratio1 = 3.76
 
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
