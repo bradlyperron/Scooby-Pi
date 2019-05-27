@@ -17,7 +17,7 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
 
         print("Socket Created")
         # specify host and port
-        server_address = ('172.29.93.7',5005)
+        server_address = ('172.29.30.168',5005)
         # unpack tuple
         (host, port) = server_address
         # connect socket to port where server is listening
