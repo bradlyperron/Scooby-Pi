@@ -26,11 +26,6 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     chan2 = AnalogIn(ads, ADS.P2) #motor current
     chan3 = AnalogIn(ads, ADS.P3) #actuator current
 
-<<<<<<< HEAD
-    motor_amp_offset = 2.51
-    actuator_amp_offset = 2.39 
-    scale = 0.04
-=======
     electronics_amp_offset = 2.47
     motor_amp_offset = 2.50 
     actuator_amp_offset = 2.50
@@ -38,7 +33,6 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     actuator_scale = 0.185
     motor_scale = 0.1
     
->>>>>>> 708e00342f6fe24b5c90f556d911fc5858cba638
     while True:
         #print('ch2: {}'.format(chan2.voltage))
         #print('ch3: {}'.format(chan3.voltage))
