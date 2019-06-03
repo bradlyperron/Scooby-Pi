@@ -9,11 +9,12 @@ if __name__ == "__main__":
     volt1 = multiprocessing.Value('d', 0.0)
     volt2 = multiprocessing.Value('d',0.0)
     motor_amp = multiprocessing.Value('d',0.0)
-    actuator_amp = multiprocessing.Value('d',0.0)    
+    actuator_amp = multiprocessing.Value('d',0.0)
+    electronics_amp = multiprocessing.Value('d',0.0)
     
     # create processes
-    p_adc = multiprocessing.Process(target=adc_main,args=(volt1,volt2,motor_amp,actuator_amp))
-    p_tcp_server = multiprocessing.Process(target=tcp_server_main,args=(volt1,volt2,motor_amp,actuator_amp))
+    p_adc = multiprocessing.Process(target=adc_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
+    p_tcp_server = multiprocessing.Process(target=tcp_server_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
     
     # start processes
     p_adc.start()

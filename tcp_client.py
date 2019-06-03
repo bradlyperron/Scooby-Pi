@@ -5,7 +5,7 @@ import struct
 import msvcrt
 import threading
 
-def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
+def tcp_client_main(volt1,volt2,actuator_amp,motor_amp,electronics_amp):
     def worker():
             
         #create socket
@@ -74,6 +74,19 @@ def tcp_client_main(volt1,volt2,actuator_amp,motor_amp):
             reply = s.recv(4096) 
             # unpack byte array inside tuple
             motor_amp.value = float(reply.decode()) 
+            time.sleep(1)
+
+            request = "electronics current"
+            try:
+                # send request in byte array
+                s.sendall(request.encode()) 
+            except socket.error:
+                print("Did not send successfully")
+                sys.exit()
+            # recieve reply from server
+            reply = s.recv(4096) 
+            # unpack byte array inside tuple
+            electronics_amp.value = float(reply.decode()) 
             time.sleep(1)
 
         print("closing socket") # close socket
