@@ -6,13 +6,13 @@ password = "Openocean2019"
 subject = "Water Detected"
 text = """\
 
-Hello from your autonomous boat,
+Hello from your autonomous boat.
 
-there has been water detected inside my hull.
+There has been water detected inside my hull,
 
 I'm slowly sinking. 
 
-Cheers
+Cheers!
 """
 
 smtp_server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
