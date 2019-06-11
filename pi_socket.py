@@ -3,7 +3,7 @@ import sys
 import multiprocessing
 import struct
 
-def tcp_server_main(volt1,volt2,motor_amp,actuator_amp):
+def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     print("server starting")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket

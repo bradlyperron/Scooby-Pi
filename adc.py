@@ -9,8 +9,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     print("adc starting")
 
     # (R1 + R2)/R2
-    resistor_ratio2 = 5.21
-    resistor_ratio1 = 3.76
+    resistor_ratio2 = 6.02
+    resistor_ratio1 = 6.0
 
     # Create the I2C bus
     i2c = busio.I2C(board.SCL, board.SDA)
@@ -21,8 +21,8 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
 
     # Create single-ended input on channel 1
     chan0 = AnalogIn(ads1, ADS.P0, ADS.P1) #primary battery voltage
-    chan0b = AnalogIn(ads, ADS.P0) #electronics current
-    chan1 = AnalogIn(ads, ADS.P1) #secondary battery voltage
+    chan0b = AnalogIn(ads, ADS.P0) #secondary battery voltage
+    chan1 = AnalogIn(ads, ADS.P1) #electronics current
     chan2 = AnalogIn(ads, ADS.P2) #motor current
     chan3 = AnalogIn(ads, ADS.P3) #actuator current
 
@@ -33,13 +33,14 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     actuator_scale = 0.185
     motor_scale = 0.1
     
+    print("v1, v2, ac, mc, ec")
+
     while True:
-        #print('ch2: {}'.format(chan2.voltage))
-        #print('ch3: {}'.format(chan3.voltage))
-        #calculate input voltage and amps
+        #calculate input voltage and current
         volt1.value = chan0.voltage*resistor_ratio1
         volt2.value = chan1.voltage*resistor_ratio2
         i=0
+	#create arrays to store current measurements
         motor_amp_val = [0]*5
         actuator_amp_val = [0]*5
         electronics_amp_val = [0]*5
@@ -53,7 +54,6 @@ def adc_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
         motor_amp.value = np.average(motor_amp_val)
         actuator_amp.value = np.average(actuator_amp_val)
         electronics_amp.value = np.average(electronics_amp_val)
-        #print("motor amp: {}\t actuator amp: {}".format(motor_amp.value,actuator_amp.value))
-        #print("motor amp: {}\t actuator amp: {}".format(chan2.voltage,chan3.voltage))
+        print("{}\t {}\t {}\t {}\t {}\t".format(volt1.value,volt2.value,actuator_amp.value,motor_amp.value,electronics_amp.value))
         
     print("adc stopping")
