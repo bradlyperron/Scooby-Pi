@@ -45,11 +45,11 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
             #package data with format [type,data]
             #might need to change comma deliminator 
             pkt += (str(i+1) + ',' + str(data[i]) + ";")
-            print(pkt)
+            #print(pkt)
         #send encoded data
         s.sendall(pkt.encode()) 
 
-        time.sleep(30)
+        time.sleep(10)
         
     s.close() #close socket
     print("server stopping")
