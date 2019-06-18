@@ -49,7 +49,7 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
         #send encoded data
         s.sendall(pkt.encode()) 
 
-        time.sleep(30)
+        time.sleep(5)
         
     s.close() #close socket
     print("server stopping")
