@@ -3,6 +3,7 @@ import sys
 import multiprocessing
 import struct
 import time
+import json
 
 def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     print("server starting")
@@ -30,18 +31,25 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     #---5 = ec---#
     #------------#
     
+    def getJson (filename,value):
+        with open('/home/pi/logs/{}.json'.format(filename),'r') as f:
+            dict = json.loads(f.read())
+            return dict[value]
+
     while True:
         v1 = str(volt1.value)
         v2 = str(volt2.value)
         mc = str(motor_amp.value)
         ac = str(actuator_amp.value)
         ec = str(electronics_amp.value)
-
-        data = [v1,v2,ac,mc,ec]
+        dpt = getJson('transducer','depth')
+        tmp = getJson('transducer' ,'temperature')
+        dtime = getJson('transducer' ,'time')
+        data = [v1,v2,ac,mc,ec,dpt,tmp,dtime]
 
         pkt = ''
         i = 0
-        for i in range(5):
+        for i in range(len(data)):
             #package data with format [type,data]
             #might need to change comma deliminator
             pkt += (str(i+1) + ',' + str(data[i]) + ";")
