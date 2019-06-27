@@ -37,11 +37,11 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
             return dict[value]
 
     while True:
-        v1 = str(volt1.value)
-        v2 = str(volt2.value)
-        mc = str(motor_amp.value)
-        ac = str(actuator_amp.value)
-        ec = str(electronics_amp.value)
+        v1 = "{0:.2f}".format(volt1.value)
+        v2 = "{0:.2f}".format(volt2.value)
+        mc = "{0:.2f}".format(motor_amp.value)
+        ac = "{0:.2f}".format(actuator_amp.value)
+        ec = "{0:.2f}".format(electronics_amp.value)
         dpt = getJson('transducer','depth')
         tmp = getJson('transducer' ,'temperature')
         dtime = getJson('transducer' ,'time')
@@ -53,7 +53,7 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
             #package data with format [type,data]
             #might need to change comma deliminator
             pkt += (str(i+1) + ',' + str(data[i]) + ";")
-        print(pkt)
+        #print(pkt)
         #send encoded data
         s.sendall(pkt.encode())
         time.sleep(1)
