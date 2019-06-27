@@ -1,6 +1,9 @@
 from adc import adc_main
 from pi_socket import pi_socket_main
 import multiprocessing
+import sys
+sys.path.append('/home/pi/NMEA0183/')
+import transducer
 
 #if running directly
 if __name__ == "__main__":
@@ -15,12 +18,14 @@ if __name__ == "__main__":
     # create processes
     p_adc = multiprocessing.Process(target=adc_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
     p_pi_socket = multiprocessing.Process(target=pi_socket_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
-    
+    p_transducer = multiprocessing.Process(target=transducer.main(),)
+
     # start processes
     p_adc.start()
     p_pi_socket.start()
+    p_transducer.start()
     
     # wait for processes to end
     p_pi_socket.join()
     p_adc.terminate()
-    p_adc.join()
+    p_transducer.terminate()
