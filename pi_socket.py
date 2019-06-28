@@ -1,6 +1,5 @@
 import socket
 import sys
-import multiprocessing
 import struct
 import time
 import json
@@ -33,9 +32,12 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     
     def getJson (filename,value):
         with open('/home/pi/logs/{}.json'.format(filename),'r') as f:
-            dict = json.loads(f.read())
-            return dict[value]
-
+            try:
+                data = f.read()
+                data = json.loads(data)
+                return data[value]
+            except:
+                return 0.0
     while True:
         v1 = "{0:.2f}".format(volt1.value)
         v2 = "{0:.2f}".format(volt2.value)
@@ -43,8 +45,8 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
         ac = "{0:.2f}".format(actuator_amp.value)
         ec = "{0:.2f}".format(electronics_amp.value)
         dpt = getJson('transducer','depth')
-        tmp = getJson('transducer' ,'temperature')
-        dtime = getJson('transducer' ,'time')
+        tmp = getJson('transducer','temperature')
+        dtime = getJson('transducer','time')
         data = [v1,v2,ac,mc,ec,dpt,tmp,dtime]
 
         pkt = ''

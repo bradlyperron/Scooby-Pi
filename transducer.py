@@ -18,24 +18,25 @@ def transducer_main():
 
     #Checks if there is a valid connection
     if nmea.exit == False:
-        print('Connection!')
+        print('Serial Connection')
         log = {'depth': 0.0, 'temperature': 0.0, 'time': ''}
 
         while True:
-
             #Depth data
             log['depth'] = nmea.data_depth['meters']
 
             #Weather data
             log['temperature'] = nmea.data_weather['water_temp']
-            
+
             #time
             log['time'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
             with open('/home/pi/logs/transducer.json','w') as f:
-                json.dump(log,f,indent=4)
+                data = json.dumps(log)
+                #print(data)
+                f.write(data)
 
-            time.sleep(0.1)
+            time.sleep(0.5)
 
         #Quit the NMEA connection
         nmea.quit()
