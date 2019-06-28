@@ -35,17 +35,11 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp,transducer
         
         try:
             data = fileHandler.read('/home/pi/logs/{}.json'.format(filename),transducer_lock)
+            data = json.loads(data)
             return data[value]
         except:
             return 0.0
         
-        # with open('/home/pi/logs/{}.json'.format(filename),'r') as f:
-        #     try:
-        #         data = f.read()
-        #         data = json.loads(data)
-        #         return data[value]
-        #     except:
-        #         return 0.0
     while True:
         v1 = "{0:.2f}".format(volt1.value)
         v2 = "{0:.2f}".format(volt2.value)

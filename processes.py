@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     # create processes
     p_adc = Process(target=adc_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
-    p_pi_socket = Process(target=pi_socket_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp))
+    p_pi_socket = Process(target=pi_socket_main,args=(volt1,volt2,motor_amp,actuator_amp,electronics_amp,transducer_lock))
     p_transducer = Process(target=transducer_main,args=(transducer_lock,))
     
     # start processes
