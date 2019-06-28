@@ -3,8 +3,9 @@ import sys
 import struct
 import time
 import json
+import fileHandler
 
-def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
+def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp,transducer_lock):
     print("server starting")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
@@ -31,13 +32,20 @@ def pi_socket_main(volt1,volt2,motor_amp,actuator_amp,electronics_amp):
     #------------#
     
     def getJson (filename,value):
-        with open('/home/pi/logs/{}.json'.format(filename),'r') as f:
-            try:
-                data = f.read()
-                data = json.loads(data)
-                return data[value]
-            except:
-                return 0.0
+        
+        try:
+            data = fileHandler.read('/home/pi/logs/{}.json'.format(filename),transducer_lock)
+            return data[value]
+        except:
+            return 0.0
+        
+        # with open('/home/pi/logs/{}.json'.format(filename),'r') as f:
+        #     try:
+        #         data = f.read()
+        #         data = json.loads(data)
+        #         return data[value]
+        #     except:
+        #         return 0.0
     while True:
         v1 = "{0:.2f}".format(volt1.value)
         v2 = "{0:.2f}".format(volt2.value)

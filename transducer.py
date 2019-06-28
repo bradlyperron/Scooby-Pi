@@ -2,8 +2,9 @@ import time
 from NMEA0183 import NMEA0183
 from datetime import datetime
 import json
+import fileHandler
 
-def transducer_main():
+def transducer_main(lock):
 
     serial_location = '/dev/ttyUSB0'
     serial_baudrate = 4800
@@ -31,12 +32,9 @@ def transducer_main():
             #time
             log['time'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
-            with open('/home/pi/logs/transducer.json','w') as f:
-                data = json.dumps(log)
-                #print(data)
-                f.write(data)
-
-            time.sleep(0.5)
+            #write data
+            fileHandler.write('/home/pi/logs/transducer.json',json.dumps(log),lock)
+            time.sleep(0.1)
 
         #Quit the NMEA connection
         nmea.quit()
