@@ -5,6 +5,7 @@ import adafruit_ads1x15.ads1115 as ADS
 from adafruit_ads1x15.analog_in import AnalogIn
 import numpy as np
 import fileHandler
+import json
 
 def adc_main(lock):
     print("adc starting")
@@ -61,5 +62,5 @@ def adc_main(lock):
 
         #log to file
         fileHandler.write('/home/pi/logs/adc.json',json.dumps(log),lock)
-        
+
     print("adc stopping")

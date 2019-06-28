@@ -15,7 +15,6 @@ def transducer_main(lock):
 
     #Starts the serial connection
     nmea.start()
-    time.sleep(1)
 
     #Checks if there is a valid connection
     if nmea.exit == False:
