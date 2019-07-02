@@ -33,7 +33,7 @@ def transducer_main():
 
             #write data
             fileHandler.write('/home/pi/logs/transducer.json',json.dumps(log))
-            time.sleep(0.1)
+            time.sleep(0.5)
 
         #Quit the NMEA connection
         nmea.quit()

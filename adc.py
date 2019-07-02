@@ -49,11 +49,11 @@ def adc_main():
         ec_vals = []
         
         #calculate average current
-        for i in range(9):
+        for i in range(99):
             ec_vals.append((chan1.voltage-electronics_amp_offset)/electronics_scale)
             mc_vals.append((chan2.voltage-motor_amp_offset)/motor_scale)
             ac_vals.append((chan3.voltage-actuator_amp_offset)/actuator_scale)
-            time.sleep(0.1)
+            time.sleep(0.01)
 
         #store current values
         log['mc'] = np.average(mc_vals)
