@@ -7,7 +7,7 @@ import numpy as np
 import fileHandler
 import json
 
-def adc_main(lock):
+def adc_main():
     print("adc starting")
 
     #(R1 + R2)/R2
@@ -61,6 +61,6 @@ def adc_main(lock):
         log['ec'] = np.average(ec_vals)
 
         #log to file
-        fileHandler.write('/home/pi/logs/adc.json',json.dumps(log),lock)
+        fileHandler.write('/home/pi/logs/adc.json',json.dumps(log))
 
     print("adc stopping")

@@ -34,7 +34,7 @@ def pi_socket_main(transducer_lock,adc_lock):
     def getJson (filename,value,lock):
         
         try:
-            data = fileHandler.read('/home/pi/logs/{}.json'.format(filename),lock)
+            data = fileHandler.read('/home/pi/logs/{}.json'.format(filename))
             data = json.loads(data)
             return data[value]
         except:

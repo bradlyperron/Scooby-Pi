@@ -32,7 +32,7 @@ def transducer_main(lock):
             log['time'] = datetime.now().strftime("%m/%d/%Y, %H:%M:%S")
 
             #write data
-            fileHandler.write('/home/pi/logs/transducer.json',json.dumps(log),lock)
+            fileHandler.write('/home/pi/logs/transducer.json',json.dumps(log))
             time.sleep(0.1)
 
         #Quit the NMEA connection

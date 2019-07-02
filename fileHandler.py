@@ -1,12 +1,17 @@
-def write(filename, data, lock):
-    lock.acquire()
-    with open(filename,'w') as f:
-        f.write(data)
-    lock.release()
+from filelock import FileLock
 
-def read(filename,lock):
-    lock.acquire()
-    with open(filename,'r') as f:
-        data = f.read()
-    lock.release()
-    return data
+def write(filename, data):
+	lock = FileLock(filename+'.lock')
+	with lock:
+		f = open(filename,'w')
+		f.write(data)
+		f.close()
+		
+
+def read(filename):
+	lock = FileLock(filename+'.lock')	
+	with lock:
+		f = open(filename,'r')
+		data = f.read()
+		f.close()
+	return data
