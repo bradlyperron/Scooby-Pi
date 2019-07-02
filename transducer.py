@@ -4,7 +4,7 @@ from datetime import datetime
 import json
 import fileHandler
 
-def transducer_main(lock):
+def transducer_main():
 
     serial_location = '/dev/ttyUSB0'
     serial_baudrate = 4800

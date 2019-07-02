@@ -5,7 +5,7 @@ import time
 import json
 import fileHandler
 
-def pi_socket_main(transducer_lock,adc_lock):
+def pi_socket_main():
     print("server starting")
     try:
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM) # create ipv4 tcp socket
@@ -31,7 +31,7 @@ def pi_socket_main(transducer_lock,adc_lock):
     #---5 = ec---#
     #------------#
     
-    def getJson (filename,value,lock):
+    def getJson (filename,value):
         
         try:
             data = fileHandler.read('/home/pi/logs/{}.json'.format(filename))
@@ -41,14 +41,14 @@ def pi_socket_main(transducer_lock,adc_lock):
             return 0.0
         
     while True:
-        v1 = "{0:.2f}".format(getJson('adc','v1',adc_lock))
-        v2 = "{0:.2f}".format(getJson('adc','v2',adc_lock))
-        mc = "{0:.2f}".format(getJson('adc','mc',adc_lock))
-        ac = "{0:.2f}".format(getJson('adc','ac',adc_lock))
-        ec = "{0:.2f}".format(getJson('adc','ec',adc_lock))
-        dpt = getJson('transducer','depth',transducer_lock)
-        tmp = getJson('transducer','temperature',transducer_lock)
-        dtime = getJson('transducer','time',transducer_lock)
+        v1 = "{0:.2f}".format(getJson('adc','v1'))
+        v2 = "{0:.2f}".format(getJson('adc','v2'))
+        mc = "{0:.2f}".format(getJson('adc','mc'))
+        ac = "{0:.2f}".format(getJson('adc','ac'))
+        ec = "{0:.2f}".format(getJson('adc','ect'))
+        dpt = getJson('transducer','depth')
+        tmp = getJson('transducer','temperature')
+        dtime = getJson('transducer','time')
         data = [v1,v2,ac,mc,ec,dpt,tmp,dtime]
 
         pkt = ''
