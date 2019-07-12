@@ -1,0 +1,59 @@
+
+int BatteryInput = A0;
+int SolarInput = A1;
+int solarvalue = 0; 
+float solarvout = 0.0;
+float solarvin = 0.0;
+float vout = 0.0;
+float vin = 0.0;
+float battery_voltage; 
+float vsolar = 0;
+float R1 = 30060.0; // resistor 1 on the voltage divider
+float R2 = 7550.0; // resistor 2 on the voltage divider
+int value = 0;
+int sum = 0;
+
+void setup(){
+   pinMode(SolarInput, INPUT);
+   Serial.begin(9600);
+   Serial.print("DC VOLTMETER");
+   pinMode(7, OUTPUT);  
+   digitalWrite(7, LOW);
+   pinMode(4, OUTPUT);  
+   digitalWrite(4, LOW);
+}
+void loop(){
+// read the value at analog input
+
+ solarvalue = analogRead(SolarInput);
+ solarvout = (solarvalue * 5.0) / 1024.0;
+ solarvin = (solarvout / (R2/(R1+R2)));  
+ delay(1000);
+
+for(int x = 0; x < 10; x++){ 
+ value = analogRead(BatteryInput);
+ vout = (value * 5.0) / 1024.0;
+ vin = (vout / (R2/(R1+R2)));  
+ delay(1000);   
+float sum =+ vin; 
+}
+
+ float Bat_Voltage = sum / 10; 
+ Serial.println(Bat_Voltage); 
+
+ while(solarvalue > 2.0){
+
+ if(vin > 12.32) 
+    digitalWrite(7,HIGH); 
+
+ else if(vin < 11.58)
+    digitalWrite(7,LOW);
+ }
+
+ if(solarvalue < 2.00)
+    digitalWrite(7,HIGH); 
+ 
+Serial.print("Solar Voltage = ");
+Serial.println(solarvin,2);
+delay(500);
+}
