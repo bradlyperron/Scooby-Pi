@@ -37,7 +37,13 @@ class Sensor (rockBlockProtocol):
         except:
             return 0.0
 
-	
-	
+    def rockBlockTxStarted(self):
+        print "rockBlockTxStarted"
+        
+    def rockBlockTxFailed(self):
+        print "rockBlockTxFailed"
+        
+    def rockBlockTxSuccess(self,momsn):
+        print "rockBlockTxSuccess " + str(momsn)
 	
 	
