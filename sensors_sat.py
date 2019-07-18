@@ -48,4 +48,4 @@ class Sensor (rockBlockProtocol):
 	
 	
 if __name__ == '__main__':
-	Sensors().main()
+	Sensor().main()
