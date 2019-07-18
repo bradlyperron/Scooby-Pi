@@ -32,7 +32,10 @@ class Sensor (rockBlockProtocol):
             	rb.close()
 		
 	
-	    depth = getJson('transducer', 'depth') 
+	    depth = getJson('transducer', 'depth')
+		
+	    print(depth)
+	    print("ayy")
             
             self.emit(depth)
                         
