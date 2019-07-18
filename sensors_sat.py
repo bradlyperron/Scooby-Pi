@@ -6,8 +6,18 @@ import json
 from rockBlock import rockBlockProtocol
  
 class Sensor (rockBlockProtocol):
-    
+	
+	
+    def emit(self, value):
+            
+ 	rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
+        	
+        rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )
+                                                                                  
+        rb.close()
+		
     SLEEP_INTERVAL = 60
+	
             
     def main(self):
             
@@ -22,13 +32,7 @@ class Sensor (rockBlockProtocol):
         	except:
             		return 0.0
 		
-            def emit(self, value):
-            
-	    	rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
-        	
-            	rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )
-                                                                                  
-            	rb.close()
+          
 	
 
 	    depth = getJson('transducer', 'depth')
