@@ -12,15 +12,25 @@ class Sensor (rockBlockProtocol):
     def main(self):
             
         while(True):
+		
+	    def getJson (filename,value):
         
-           def emit(self, value):
+       		try:
+            		data = fileHandler.read('/home/pi/logs/{}.json'.format(filename))
+            		data = json.loads(data)
+            		return data[value]
+        	except:
+            		return 0.0
+       		
+		
+	    def emit(self, value):
             
-	    rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
-        
-            rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )
+	    	rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
+        	
+            	rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )
                                                                                   
-            rb.close()
-	
+            	rb.close()
+		
 	
 	    depth = getJson('transducer', 'depth') 
             
