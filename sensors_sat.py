@@ -21,26 +21,22 @@ class Sensor (rockBlockProtocol):
             		return data[value]
         	except:
             		return 0.0
-       		
 		
-	    def emit(self, value):
+	
+	    depth = getJson('transducer', 'depth')
+	    print(depth)
+	    print("ayy")
+            self.emit(depth)          
+            time.sleep( self.SLEEP_INTERVAL)
+		
+		
+            def emit(self, value):
             
 	    	rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
         	
             	rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )
                                                                                   
-            	rb.close()
-		
-	
-	    depth = getJson('transducer', 'depth')
-		
-	    print(depth)
-	    print("ayy")
-            
-            self.emit(depth)
-                        
-            time.sleep( self.SLEEP_INTERVAL)
-                                
+            	rb.close()                   
 
     def rockBlockTxStarted(self):
         print "rockBlockTxStarted"
