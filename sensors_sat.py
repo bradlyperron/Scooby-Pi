@@ -7,15 +7,30 @@ import struct
 
 from rockBlock import rockBlockProtocol
  
-class MoExample (rockBlockProtocol):
+class Sensors (rockBlockProtocol):
+	
+	SLEEP_INTERVAL = 60
     
     def main(self):
       
-        rb = rockBlock.rockBlock("/dev/ttyUSB0", self)
+         = rockBlock.rockBlock("/dev/ttyUSB0", self)
+	
+    while True:
+	
+	value = td.obtain() 
+	
+        self.emit(value)   
         
-        rb.sendMessage("Hello World RockBLOCK!")      
+	time.sleep(self.SLEEP_INTERVAL)
+	
+     def emit(self, value):
+            
+        rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
         
-	rb.close()
+        rb.sendMessage("Td:" + str(time.time()) + ":" + str(value) )
+                                                                                  
+        rb.close()
+        
         
     def rockBlockTxStarted(self):
         print "rockBlockTxStarted"
@@ -27,4 +42,10 @@ class MoExample (rockBlockProtocol):
         print "rockBlockTxSuccess " + str(momsn)
         
 if __name__ == '__main__':
-    MoExample().main()
+	Sensors().main()
+
+	
+	
+	
+	
+	
