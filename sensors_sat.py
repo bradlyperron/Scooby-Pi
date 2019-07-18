@@ -26,7 +26,7 @@ class Sensor (rockBlockProtocol):
           
 	    depth = getJson('transducer', 'depth')
 	    print(depth)	              	            
- 	    rb = rockBlock.rockBlock("/dev/ttyUSB1", self)
+ 	    rb = rockBlock.rockBlock("/dev/ttyUSB0", self)
             rb.sendMessage("Td:" + str(time.time()) + ":" + str(depth) )                                                                    
             rb.close()
             time.sleep( self.SLEEP_INTERVAL)
