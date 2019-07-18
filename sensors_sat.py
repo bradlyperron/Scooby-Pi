@@ -34,7 +34,7 @@ class Sensor (rockBlockProtocol):
 	    depth = getJson('transducer', 'depth')
 	    print(depth)
 	    print("ayy")
-            #self.emit(depth)          
+            self.emit(depth)          
             time.sleep( self.SLEEP_INTERVAL)
 		
 		
