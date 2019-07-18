@@ -47,3 +47,5 @@ class Sensor (rockBlockProtocol):
         print "rockBlockTxSuccess " + str(momsn)
 	
 	
+if __name__ == '__main__':
+	Sensors().main()
