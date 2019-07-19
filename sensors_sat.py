@@ -30,11 +30,19 @@ class Sensor (rockBlockProtocol):
         	rb.close()
         	time.sleep( self.SLEEP_INTERVAL)       
 
-
     
-    	    value = getJson('transducer', 'depth')
-	    print(value)	              	               
-	    emit(value)
+    	    v1 = "{0:.2f}".format(getJson('adc','v1'))
+       	    v2 = "{0:.2f}".format(getJson('adc','v2'))
+            mc = "{0:.2f}".format(getJson('adc','mc'))
+            ac = "{0:.2f}".format(getJson('adc','ac'))
+            ec = "{0:.2f}".format(getJson('adc','ect'))
+            dpt = getJson('transducer','depth')
+            tmp = getJson('transducer','temperature')
+            dtime = getJson('transducer','time')
+            data = [v1,v2,ac,mc,ec,dpt,tmp,dtime]
+
+	    print(data)	              	               
+	    #emit(value)
 		                             
     def rockBlockTxStarted(self):
         print "rockBlockTxStarted"
