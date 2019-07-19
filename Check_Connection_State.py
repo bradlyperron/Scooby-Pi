@@ -1,5 +1,7 @@
-import subprocess
+from subprocess import *
 import sys
+import processes
+import sensors_sat
 
 def ping():
     try:
@@ -26,7 +28,11 @@ def check_state():
 					return False
 					
 			
-x =check_state()
-print("wabam")
-print(x)
+status = check_state()
+if status == True:
+	 Popen('python proccesses.py') #you've got a cell connection, start cell programs
+	
+else:
+	#you do not have a cell connection
+	#stop cell programs and start sat programs
 
