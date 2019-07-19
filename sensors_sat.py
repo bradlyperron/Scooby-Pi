@@ -39,8 +39,16 @@ class Sensor (rockBlockProtocol):
         tmp = getJson('transducer','temperature')
         dtime = getJson('transducer','time')
         data = [v1,v2,ac,mc,ec,dpt,tmp,dtime]
+        print(data)
 
-        print(data)                                
+        
+        pkt = ''
+        i = 0
+        for i in range(len(data)):
+            #package data with format [type,data]
+            #might need to change comma deliminator
+            pkt += (str(i+1) + ',' + str(data[i]) + ";")  
+            print(pkt)                              
         #emit(value)
                                      
     def rockBlockTxStarted(self):
@@ -55,4 +63,3 @@ class Sensor (rockBlockProtocol):
     
 if __name__ == '__main__':
     Sensor().main()
-
