@@ -61,7 +61,7 @@ class Sensor (rockBlockProtocol):
         print(("rockBlockTxSuccess ") + str(momsn))
     
     
-test = input("enter a test")
+test = input("enter a test ")
 
 if test == 'test':
     Sensor().main()
