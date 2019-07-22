@@ -52,14 +52,16 @@ class Sensor (rockBlockProtocol):
         emit(pkt)
                                      
     def rockBlockTxStarted(self):
-        print "rockBlockTxStarted"
+        print("rockBlockTxStarted")
         
     def rockBlockTxFailed(self):
-        print "rockBlockTxFailed"
+        print("rockBlockTxFailed")
         
     def rockBlockTxSuccess(self,momsn):
-        print "rockBlockTxSuccess " + str(momsn)
+        print(("rockBlockTxSuccess ") + str(momsn))
     
     
-if __name__ == '__main__':
+test = input("enter a test")
+
+if test == 'test':
     Sensor().main()
