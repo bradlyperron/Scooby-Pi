@@ -10,16 +10,16 @@ class MoExample (rockBlockProtocol):
         
         rb.sendMessage("Hello World RockBLOCK!")      
         
-	rb.close()
+    rb.close()
         
     def rockBlockTxStarted(self):
-        print "rockBlockTxStarted"
+        print("rockBlockTxStarted")
         
     def rockBlockTxFailed(self):
-        print "rockBlockTxFailed"
+        print("rockBlockTxFailed")
         
     def rockBlockTxSuccess(self,momsn):
-        print "rockBlockTxSuccess " + str(momsn)
+        print(("rockBlockTxSuccess ") + str(momsn))
         
 if __name__ == '__main__':
     MoExample().main()
