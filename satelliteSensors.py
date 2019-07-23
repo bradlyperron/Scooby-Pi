@@ -49,7 +49,7 @@ class Sensor (rockBlockProtocol):
             #might need to change comma deliminator
             pkt += (str(i+1) + ',' + str(data[i]) + ";")  
         print(pkt)                              
-       # emit(pkt)
+        emit(pkt)
                                      
     def rockBlockTxStarted(self):
         print("rockBlockTxStarted")
