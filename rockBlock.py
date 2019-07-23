@@ -333,10 +333,10 @@ class rockBlock(object):
                     checksum = checksum + ord(c)
                 
                                 
-                self.s.write( str(msg) )
+                self.s.write(b" str(msg)" )
                 
-                self.s.write( chr( checksum >> 8 ) )
-                self.s.write( chr( checksum & 0xFF ) )
+                self.s.write(b" chr( checksum >> 8 )" )
+                self.s.write(b" chr( checksum & 0xFF )" )
                                        
                 self.s.readline().strip()   #BLANK
                 
