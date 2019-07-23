@@ -30,11 +30,11 @@ def check_state():
 			
 status = check_state()
 if status == True:
-	os.system('python3 processes.py')
+	#os.system('python3 processes.py')
 	print("starting cell sensors")
 	identifier = 'cell'
 else:
-	os.system('python satelliteSensors.py')
+	#os.system('python satelliteSensors.py')
 	print("starting sat sensors")
 	identifier = 'Sat'
 
