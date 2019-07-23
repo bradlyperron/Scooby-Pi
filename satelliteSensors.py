@@ -23,7 +23,7 @@ class Sensor (rockBlockProtocol):
                     return 0.0
         
           
-        def emit(self, pkt):
+        def emit(pkt, self):
             rb = rockBlock.rockBlock("/dev/ttyUSB0", self)
             rb.sendMessage(pkt)                                                                    
             rb.close()
