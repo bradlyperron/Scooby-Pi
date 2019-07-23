@@ -336,7 +336,7 @@ class rockBlock(object):
                 self.s.write( str(msg) )
                 
                 self.s.write( chr( checksum >> 8 ) )
-                self.s.write( chr( checksum & 0xFF )" )
+                self.s.write( chr( checksum & 0xFF ) )
                                        
                 self.s.readline().strip()   #BLANK
                 
