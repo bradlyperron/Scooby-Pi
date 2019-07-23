@@ -1,7 +1,5 @@
 from subprocess import *
 import sys
-import processes
-import satelliteSensors
 
 def ping():
     try:
