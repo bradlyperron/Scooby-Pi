@@ -23,7 +23,7 @@ class Sensor (rockBlockProtocol):
                     return 0.0
         
           
-        def emit(pkt):
+        def emit(self, pkt):
             rb = rockBlock.rockBlock("/dev/ttyUSB0", self)
             rb.sendMessage(pkt)                                                                    
             rb.close()
@@ -49,7 +49,7 @@ class Sensor (rockBlockProtocol):
             #might need to change comma deliminator
             pkt += (str(i+1) + ',' + str(data[i]) + ";")  
         print(pkt)                              
-        emit(pkt)
+        self.emit(pkt)
                                      
     def rockBlockTxStarted(self):
         print("rockBlockTxStarted")
