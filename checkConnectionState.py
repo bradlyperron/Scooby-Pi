@@ -28,10 +28,10 @@ def check_state():
 					return False
 					
 			
-status = check_state()
-if status == True:
-	 Popen('python proccesses.py') #you've got a cell connection, start cell programs
-	 sys.exit()
+#status = check_state()
+#if status == True:
+#	 Popen('python proccesses.py') #you've got a cell connection, start cell programs
+#	 sys.exit()
 	  
 #else:
 	#you do not have a cell connection
