@@ -1,6 +1,9 @@
 from subprocess import *
 import sys
+import subprocess
+import os
 
+identifier = ''
 def ping():
     try:
         subprocess.check_output(["ping", "1.1.1.1"])
@@ -12,7 +15,6 @@ def check_state():
 	state = ping() 
 	print(state)
 	if state == True:
-		print("cellular connection")
 		return True
 	else:
 		for i in range(3):
@@ -26,12 +28,14 @@ def check_state():
 					return False
 					
 			
-#status = check_state()
-#if status == True:
-#	 Popen('python proccesses.py') #you've got a cell connection, start cell programs
-#	 sys.exit()
-	  
-#else:
-	#you do not have a cell connection
-	#stop cell programs and start sat programs
+status = check_state()
+if status == True:
+	os.system('python3 processes.py')
+	print("starting cell sensors")
+	identifier = 'cell'
+else:
+	os.system('python satelliteSensors.py')
+	print("starting sat sensors")
+	identifier = 'Sat'
 
+print("the state is", identifier)
