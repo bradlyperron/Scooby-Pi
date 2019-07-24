@@ -24,7 +24,7 @@ def checkState():
 					return False 
 
 
-
+checkConnectionState = checkState()
 if checkConnectionState == True:
 	print("Starting cell sensors")
 
