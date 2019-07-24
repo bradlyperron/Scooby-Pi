@@ -19,13 +19,11 @@ def checkState():
 	else:
 		for i in range(10):
 			val = pingTest()
-			print(val)
 			if val >= 4:
-				print("Cell")
 				return True
 			else:
-				print("not connected")
 				if i == 9 and val == False:
+					print("The state is Sat")
 					return False 
 
 
