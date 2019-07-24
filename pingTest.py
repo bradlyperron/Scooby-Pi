@@ -1,16 +1,33 @@
 import subprocess
 
 state = ''
-
 def pingTest():
 	ping = subprocess.call(["ping", "8.8.8.8", "-c1", "-W2", "-q"])
 	return ping
 
-state = pingTest()
 
-if state == 0:
-	print("The state is Cell")
+def checkState():
+	state = pingTest()
+	if state == 0:
+		print("The state is Cell")
+		return True
+	else:
+		for i in range(3):
+			val = pingTest()
+			print(val)
+			if val == 0:
+				print("Cell")
+				return True
+			else:
+				print("not connected")
+				if i == 2 and val == False:
+					return False 
+
+
+
+checkConnectionState = checkState() 
+if checkConnectionState == True:
+	print("Starting cell sensors")
+
 else:
-	print("The state is Sat")
-
-
+	print("Starting sat sensors")
