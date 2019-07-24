@@ -3,24 +3,29 @@ import time
 
 state = ''
 def pingTest():
-	ping = subprocess.call(["ping", "8.8.8.8", "-c1", "-W2", "-q"])
-	return ping
+	for i in range(6):
+		ping = subprocess.call(["ping", "8.8.8.8", "-c1", "-W2", "-q"])
+		if ping == 1:
+			return False	
+		else:
+			continue
+	return i 
 
 def checkState():
 	state = pingTest()
-	if state == 0:
+	if state >= 4:
 		print("The state is Cell")
 		return True
 	else:
-		for i in range(20):
+		for i in range(10):
 			val = pingTest()
 			print(val)
-			if val == 0:
+			if val >= 4:
 				print("Cell")
 				return True
 			else:
 				print("not connected")
-				if i == 19 and val == False:
+				if i == 9 and val == False:
 					return False 
 
 
