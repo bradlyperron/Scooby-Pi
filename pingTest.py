@@ -1,4 +1,5 @@
 import subprocess
+import time
 
 state = ''
 def pingTest():
@@ -8,6 +9,7 @@ def pingTest():
 while True:
 	ping = pingTest()
 	print(ping)
+	time.delay(1)
 # def checkState():
 # 	state = pingTest()
 # 	if state == 0:
