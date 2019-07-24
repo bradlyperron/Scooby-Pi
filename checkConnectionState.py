@@ -36,3 +36,4 @@ if checkConnectionState == True:
 
 else:
 	print("Starting sat sensors")
+	os.system("python satelliteSensors.py")
