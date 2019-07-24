@@ -31,7 +31,7 @@ def checkState():
 checkConnectionState = checkState()
 if checkConnectionState == True:
 	print("Starting cell sensors")
-	os.system("python processes.py")
+	os.system("python3 processes.py")
 	
 
 else:
