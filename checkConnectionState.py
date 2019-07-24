@@ -1,5 +1,6 @@
 import subprocess
 import time
+import os
 
 state = ''
 def pingTest():
@@ -30,6 +31,8 @@ def checkState():
 checkConnectionState = checkState()
 if checkConnectionState == True:
 	print("Starting cell sensors")
+	os.system("python processes.py")
+	
 
 else:
 	print("Starting sat sensors")
