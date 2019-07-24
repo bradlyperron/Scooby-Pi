@@ -12,7 +12,7 @@ def checkState():
 		print("The state is Cell")
 		return True
 	else:
-		for i in range(11):
+		for i in range(20):
 			val = pingTest()
 			print(val)
 			if val == 0:
@@ -20,7 +20,7 @@ def checkState():
 				return True
 			else:
 				print("not connected")
-				if i == 10 and val == False:
+				if i == 19 and val == False:
 					return False 
 
 
