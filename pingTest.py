@@ -9,7 +9,7 @@ def pingTest():
 while True:
 	ping = pingTest()
 	print(ping)
-	time.delay(1)
+	time.sleep(1)
 # def checkState():
 # 	state = pingTest()
 # 	if state == 0:
