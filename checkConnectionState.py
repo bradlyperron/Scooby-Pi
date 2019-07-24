@@ -8,7 +8,8 @@ def pingTest():
 		if ping == 1:
 			return False	
 		else:
-		   	return i 
+			continue
+	return i 
 
 status = pingTest()
 print(status)
