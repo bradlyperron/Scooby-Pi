@@ -13,12 +13,14 @@ float R2 = 7550.0; // resistor 2 on the voltage divider
 int value = 0;
 int sum = 0;
 
+//Code Change (August 28, 2019) to set Pn 7 High
+
 void setup(){
    pinMode(SolarInput, INPUT);
    Serial.begin(9600);
    Serial.print("DC VOLTMETER");
    pinMode(7, OUTPUT);  
-   digitalWrite(7, LOW);
+   digitalWrite(7, HIGH);
    pinMode(4, OUTPUT);  
    digitalWrite(4, LOW);
 }
@@ -42,17 +44,20 @@ float sum =+ vin;
  Serial.println(Bat_Voltage); 
 
  while(solarvalue > 2.0){
+ 
+// Change Made August 28, 2019- Allows relay NC poistion for Elec Battery
 
  if(vin > 12.32) 
-    digitalWrite(7,HIGH); 
+    digitalWrite(7,LOW); 
 
  else if(vin < 11.58)
-    digitalWrite(7,LOW);
+    digitalWrite(7,HIGH);
  }
 
  if(solarvalue < 2.00)
     digitalWrite(7,HIGH); 
- 
+    
+   
 Serial.print("Solar Voltage = ");
 Serial.println(solarvin,2);
 delay(500);
